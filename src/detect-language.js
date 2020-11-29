@@ -27,7 +27,7 @@ function getTheErrorResponse(errorMessage, defaultLanguage) {
   *
   */
 function main(params) {
-
+  console.log("Test: " + params.test)
   /*
    * The default language to choose in case of an error
    */
@@ -36,7 +36,6 @@ function main(params) {
   return new Promise(function (resolve, reject) {
 
     try {
-      
       // *******TODO**********
       // - Call the language identification API of the translation service
       // see: https://cloud.ibm.com/apidocs/language-translator?code=node#identify-language
@@ -46,16 +45,36 @@ function main(params) {
 
       // in case of errors during the call resolve with an error message according to the pattern 
       // found in the catch clause below
-
-      resolve({
-        statusCode: 200,
-        body: {
-          text: params.text, 
-          language: "<Best Language>",
-          confidence: 0.5,
-        },
-        headers: { 'Content-Type': 'application/json' }
+      const languageTranslator = new LanguageTranslatorV3({
+      version: '2018-05-01',
+      authenticator: new IamAuthenticator({
+      apikey: 'frQRTxd7lJvd42XwcTruIX1NszKnRT1dEAtlm7zsxNTd',
+      }),
+      serviceUrl: 'https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/a55ce913-04e8-40d3-88a6-d4331c73caa7',
       });
+      
+      const identifyParams = {
+        text: 'Language translator translates text from one language to another'
+      };
+      
+      languageTranslator.identify(identifyParams)
+        .then(identifiedLanguages => {
+          console.log(JSON.stringify(identifiedLanguages, null, 2));
+          resolve({
+            statusCode: 200,
+            body: {
+              text: params.text, 
+              language: params.language,
+              confidence: 0.5,
+            },
+            headers: { 'Content-Type': 'application/json' }
+          });
+        })
+        .catch(err => {
+          console.log('error:', err);
+        });
+
+
 
 
     } catch (err) {
