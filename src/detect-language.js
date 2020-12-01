@@ -47,7 +47,7 @@ function main(params) {
       const languageTranslator = new LanguageTranslatorV3({
       version: params.version,
       authenticator: new IamAuthenticator({
-      apikey: params.apikey,
+      apikey: "2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW",
       }),
       serviceUrl: params.serviceUrl,
       });

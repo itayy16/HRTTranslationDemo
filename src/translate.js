@@ -53,14 +53,14 @@ function main(params) {
       const languageTranslator = new LanguageTranslatorV3({
       version: params.version,
       authenticator: new IamAuthenticator({
-        apikey: params.apikey,
+        apikey: "2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW",
       }),
-      serviceUrl: params.serviceUrl,
+      serviceUrl: "https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/93f5299e-ef85-423b-b068-8a98a8fa8bf6"      ,
       });
 
       const translateParams = {
-        text: params.text,
-        modelId: params.modelId,
+        text: SourceBuffer.text,
+        modelId: EventTarget.modelId,
       };
 
       languageTranslator.translate(translateParams)
@@ -69,7 +69,7 @@ function main(params) {
           resolve({
             statusCode: 200,
             body: {
-              translations: params.translations,
+              translations: translationResult,
               words: params.words,
               characters: params.characters,
             },
