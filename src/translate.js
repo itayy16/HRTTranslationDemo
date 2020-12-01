@@ -60,28 +60,23 @@ function main(params) {
 
       const translateParams = {
         text: params.body.text,
-<<<<<<< HEAD
         modelId: params.body.language+"-en",
-=======
-       source: params.source,
-        target: params.target,
-        //modelId: es-en,
->>>>>>> d53782c41ed18b05f307208f6547316eb3372533
       };
 
       languageTranslator.translate(translateParams)
         .then(translationResult => {
           //console.log(JSON.stringify(translationResult, null, 2));
-          const translatedText = translationResult.result.translations[0].translation;
+          const translatedText = translationResult.result.translations[0].translations;
           const numOfWords = translationResult.result.translations.word_count;
           const numOfChars = translationResult.result.translations.characters_count;
           resolve({
             statusCode: 200,
             body: { 
               //translations: "hello",
-              translationsssssss: translatedText,
+              translations: translatedText,
               words: numOfWords,
               characters: numOfChars,
+              
             },
             headers: { 'Content-Type': 'application/json' }
           });
