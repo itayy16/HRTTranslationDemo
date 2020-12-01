@@ -52,7 +52,7 @@ function main(params) {
       resolve({
         statusCode: 200,
         body: {
-          translations: "<translated text>",
+          translations: params.translations,
           words: 1,
           characters: 11,
         },

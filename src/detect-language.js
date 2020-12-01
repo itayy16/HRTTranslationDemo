@@ -53,7 +53,8 @@ function main(params) {
       });
       
       const identifyParams = {
-        text: params.text
+        text: "helllo"
+        //params.text
       };
       
       languageTranslator.identify(identifyParams)
