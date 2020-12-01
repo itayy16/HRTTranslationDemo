@@ -49,7 +49,7 @@ function main(params) {
       authenticator: new IamAuthenticator({
       apikey: "2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW",
       }),
-      serviceUrl: params.serviceUrl,
+      serviceUrl: "https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/93f5299e-ef85-423b-b068-8a98a8fa8bf6",
       });
       
       const identifyParams = {
