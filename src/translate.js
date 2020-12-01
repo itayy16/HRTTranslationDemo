@@ -59,8 +59,10 @@ function main(params) {
       });
 
       const translateParams = {
-        text: SourceBuffer.text,
-        modelId: EventTarget.modelId,
+        text: params.text,
+        //source: params.source,
+        //target: params.target,
+        modelId: es-en,
       };
 
       languageTranslator.translate(translateParams)
@@ -70,8 +72,8 @@ function main(params) {
             statusCode: 200,
             body: {
               translations: translationResult,
-              words: params.words,
-              characters: params.characters,
+              words: 1,
+              characters: 1,
             },
             headers: { 'Content-Type': 'application/json' }
           });
