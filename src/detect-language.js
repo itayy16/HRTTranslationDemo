@@ -45,11 +45,11 @@ function main(params) {
       // in case of errors during the call resolve with an error message according to the pattern 
       // found in the catch clause below
       const languageTranslator = new LanguageTranslatorV3({
-      version: params.version,
+      version: '2018-05-01',
       authenticator: new IamAuthenticator({
-      apikey: "2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW",
+      apikey: '2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW',
       }),
-      serviceUrl: "https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/93f5299e-ef85-423b-b068-8a98a8fa8bf6",
+      serviceUrl: 'https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/93f5299e-ef85-423b-b068-8a98a8fa8bf6',
       });
       
       const identifyParams = {
@@ -58,13 +58,15 @@ function main(params) {
       
       languageTranslator.identify(identifyParams)
         .then(identifiedLanguages => {
-          console.log(JSON.stringify(identifiedLanguages, null, 2));
+          //console.log(JSON.stringify(identifiedLanguages, null, 2));
+          languageIdentified = identifiedLanguages.result.languages[0].language;
+          languageConfidence = identifiedLanguages.result.languages[0].confidence;
           resolve({
             statusCode: 200,
             body: {
-              text: params.text, 
-              language: params.language,
-              confidence: 0.5,
+              text: identifyParams.text, 
+              language: languageIdentified,
+              confidence: languageConfidence,
             },
             headers: { 'Content-Type': 'application/json' }
           });

@@ -51,29 +51,31 @@ function main(params) {
       // pick the language with the highest confidence, and send it back
 
       const languageTranslator = new LanguageTranslatorV3({
-      version: params.version,
+      version: '2018-05-01',
       authenticator: new IamAuthenticator({
-        apikey: "2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW",
+        apikey: '2OOAWPkIBZrUzGlEnKXru3BIsi-j24zcYVOWxtQke2nW',
       }),
-      serviceUrl: "https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/93f5299e-ef85-423b-b068-8a98a8fa8bf6"      ,
+      serviceUrl: 'https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/93f5299e-ef85-423b-b068-8a98a8fa8bf6',
       });
 
       const translateParams = {
         text: params.body.text,
-        source: params.source,
-        target: params.target,
-        //modelId: es-en,
+        modelId: params.body.language+"-en",
       };
 
       languageTranslator.translate(translateParams)
         .then(translationResult => {
-          console.log(JSON.stringify(translationResult, null, 2));
+          //console.log(JSON.stringify(translationResult, null, 2));
+          const translatedText = translationResult.result.translations[0].translation;
+          const numOfWords = translationResult.result.translations.word_count;
+          const numOfChars = translationResult.result.translations.characters_count;
           resolve({
             statusCode: 200,
-            body: {
-              translations: translationResult,
-              words: 1,
-              characters: 1,
+            body: { 
+              //translations: "hello",
+              translationsssssss: translatedText,
+              words: numOfWords,
+              characters: numOfChars,
             },
             headers: { 'Content-Type': 'application/json' }
           });
