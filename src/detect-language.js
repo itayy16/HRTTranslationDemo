@@ -58,6 +58,7 @@ function main(params) {
       
       languageTranslator.identify(identifyParams)
         .then(identifiedLanguages => {
+<<<<<<< HEAD
           const identificationLanguage = identifiedLanguages.result.language[0].language;
           const identificationConfidence = identifiedLanguages.result.language[0].confidence;
           //console.log(JSON.stringify(identifiedLanguages, null, 2));
@@ -67,6 +68,17 @@ function main(params) {
               text: params.text, 
               language: identificationLanguage,
               confidence: identificationConfidence,
+=======
+          //console.log(JSON.stringify(identifiedLanguages, null, 2));
+          languageConfidence = identifiedLanguages.result.languages[0].confidence;
+          languageIdentified = identifiedLanguages.result.languages[0].language;
+          resolve({
+            statusCode: 200,
+            body: {
+              text: identifyParams.text, 
+              language: languageIdentified,
+              confidence: languageConfidence,
+>>>>>>> 41119f3bbdce43be4353ae4bbf1b4d0e7bb14f51
             },
             headers: { 'Content-Type': 'application/json' }
           });
