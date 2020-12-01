@@ -59,10 +59,10 @@ function main(params) {
       });
 
       const translateParams = {
-        text: params.text,
-        //source: params.source,
-        //target: params.target,
-        modelId: es-en,
+        text: params.body.text,
+        source: params.source,
+        target: params.target,
+        //modelId: es-en,
       };
 
       languageTranslator.translate(translateParams)

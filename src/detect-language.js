@@ -27,7 +27,7 @@ function getTheErrorResponse(errorMessage, defaultLanguage) {
   *
   */
 function main(params) {
-  console.log("Test: " + params.test)
+
   /*
    * The default language to choose in case of an error
    */
@@ -63,8 +63,6 @@ function main(params) {
             statusCode: 200,
             body: {
               text: params.text, 
-              //identifiedLanguages[0].language
-              // identifiedLanguages[0].confidence
               language: params.language,
               confidence: 0.5,
             },
