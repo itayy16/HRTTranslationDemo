@@ -59,8 +59,8 @@ function main(params) {
       languageTranslator.identify(identifyParams)
         .then(identifiedLanguages => {
           //console.log(JSON.stringify(identifiedLanguages, null, 2));
-          languageIdentified = identifiedLanguages.result.languages[0].language;
           languageConfidence = identifiedLanguages.result.languages[0].confidence;
+          languageIdentified = identifiedLanguages.result.languages[0].language;
           resolve({
             statusCode: 200,
             body: {
