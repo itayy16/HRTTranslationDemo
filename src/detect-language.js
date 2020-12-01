@@ -34,7 +34,6 @@ function main(params) {
   const defaultLanguage = 'en';
 
   return new Promise(function (resolve, reject) {
-
     try {
       // *******TODO**********
       // - Call the language identification API of the translation service
@@ -46,15 +45,15 @@ function main(params) {
       // in case of errors during the call resolve with an error message according to the pattern 
       // found in the catch clause below
       const languageTranslator = new LanguageTranslatorV3({
-      version: '2018-05-01',
+      version: params.version,
       authenticator: new IamAuthenticator({
-      apikey: 'frQRTxd7lJvd42XwcTruIX1NszKnRT1dEAtlm7zsxNTd',
+      apikey: params.apikey,
       }),
-      serviceUrl: 'https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/a55ce913-04e8-40d3-88a6-d4331c73caa7',
+      serviceUrl: params.serviceUrl,
       });
       
       const identifyParams = {
-        text: 'Language translator translates text from one language to another'
+        text: params.text
       };
       
       languageTranslator.identify(identifyParams)
@@ -64,6 +63,8 @@ function main(params) {
             statusCode: 200,
             body: {
               text: params.text, 
+              //identifiedLanguages[0].language
+              // identifiedLanguages[0].confidence
               language: params.language,
               confidence: 0.5,
             },
