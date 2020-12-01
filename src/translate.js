@@ -60,7 +60,7 @@ function main(params) {
 
       const translateParams = {
         text: params.body.text,
-        source: params.source,
+       source: params.source,
         target: params.target,
         //modelId: es-en,
       };

@@ -58,13 +58,15 @@ function main(params) {
       
       languageTranslator.identify(identifyParams)
         .then(identifiedLanguages => {
-          console.log(JSON.stringify(identifiedLanguages, null, 2));
+          const identificationConfidence = identifiedLanguages.result.language[0].confidence;
+          const identificationLanguage = identifiedLanguages.result.language[0].language;
+          //console.log(JSON.stringify(identifiedLanguages, null, 2));
           resolve({
             statusCode: 200,
             body: {
               text: params.text, 
-              language: params.language,
-              confidence: 0.5,
+              language: identificationLanguage,
+              confidence: identificationConfidence,
             },
             headers: { 'Content-Type': 'application/json' }
           });
