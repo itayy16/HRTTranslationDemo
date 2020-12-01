@@ -53,8 +53,7 @@ function main(params) {
       });
       
       const identifyParams = {
-        text: "helllo"
-        //params.text
+        text: params.text
       };
       
       languageTranslator.identify(identifyParams)
@@ -75,9 +74,6 @@ function main(params) {
         .catch(err => {
           console.log('error:', err);
         });
-
-
-
 
     } catch (err) {
       console.error('Error while initializing the AI service', err);

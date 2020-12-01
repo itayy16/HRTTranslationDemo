@@ -49,15 +49,36 @@ function main(params) {
       // found in the catch clause below
 
       // pick the language with the highest confidence, and send it back
-      resolve({
-        statusCode: 200,
-        body: {
-          translations: params.translations,
-          words: 1,
-          characters: 11,
-        },
-        headers: { 'Content-Type': 'application/json' }
+
+      const languageTranslator = new LanguageTranslatorV3({
+      version: params.version,
+      authenticator: new IamAuthenticator({
+        apikey: params.apikey,
+      }),
+      serviceUrl: params.serviceUrl,
       });
+
+      const translateParams = {
+        text: params.text,
+        modelId: params.modelId,
+      };
+
+      languageTranslator.translate(translateParams)
+        .then(translationResult => {
+          console.log(JSON.stringify(translationResult, null, 2));
+          resolve({
+            statusCode: 200,
+            body: {
+              translations: params.translations,
+              words: params.words,
+              characters: params.characters,
+            },
+            headers: { 'Content-Type': 'application/json' }
+          });
+        })
+        .catch(err => {
+          console.log('error:', err);
+        });
          
     } catch (err) {
       console.error('Error while initializing the AI service', err);
