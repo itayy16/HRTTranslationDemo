@@ -60,7 +60,7 @@ function main(params) {
         .then(identifiedLanguages => {
           const identificationLanguage = identifiedLanguages.result.language[0].language;
           const identificationConfidence = identifiedLanguages.result.language[0].confidence;
-          //console.log(JSON.stringify(identifiedLanguages, null, 2));
+          console.log(JSON.stringify(identifiedLanguages, null, 2));
           resolve({
             statusCode: 200,
             body: {

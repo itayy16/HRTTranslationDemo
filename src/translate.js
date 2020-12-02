@@ -17,6 +17,7 @@ function getTheErrorResponse(errorMessage, defaultLanguage) {
   };
 }
 
+
 /**
   *
   * main() will be run when teh action is invoked
@@ -65,8 +66,8 @@ function main(params) {
 
       languageTranslator.translate(translateParams)
         .then(translationResult => {
-          //console.log(JSON.stringify(translationResult, null, 2));
-          const translatedText = translationResult.result.translations[0].translations;
+          console.log(JSON.stringify(translationResult, null, 2));
+          const translatedText = translationResult.result.translations[0].translation;
           const numOfWords = translationResult.result.translations.word_count;
           const numOfChars = translationResult.result.translations.characters_count;
           resolve({
@@ -84,9 +85,9 @@ function main(params) {
           console.log('error:', err);
         });
          
-    } catch (err) {
-      console.error('Error while initializing the AI service', err);
-      resolve(getTheErrorResponse('Error while communicating with the language service', defaultLanguage));
-    }
-  });
-}
+      } catch (err) {
+        console.error('Error while initializing the AI service', err);
+        resolve(getTheErrorResponse('Error while communicating with the language service', defaultLanguage));
+      }
+    });
+  }
