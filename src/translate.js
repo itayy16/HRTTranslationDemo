@@ -60,7 +60,7 @@ function main(params) {
 
       const translateParams = {
         text: params.body.text,
-        modelId: params.body.language+"-en",
+        modelId: params.body.language + "-en",
       };
 
       languageTranslator.translate(translateParams)
@@ -72,7 +72,6 @@ function main(params) {
           resolve({
             statusCode: 200,
             body: { 
-              //translations: "hello",
               translations: translatedText,
               words: numOfWords,
               characters: numOfChars,
